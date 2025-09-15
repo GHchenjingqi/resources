@@ -1,0 +1,12 @@
+{
+  "name": "resources",
+  "version": "1.0.0",
+  "main": "creat.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node creat.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
