@@ -50,8 +50,19 @@ class Mayypp extends React.Component {
 }
 ```
 
-+ 组件传参、接收都需要用 {} 进行多包括一层，{number},{true},{[1,2,3]},{{name:''}}
-+ 动态style，也需要用 {} 进行多包括一层，{{'color':'red'}}
++ 组件传参、接收都需要用 {} 进行多包括一层
+
+```jsx
+<Buttons params={["1", "2", "3", "4", "5"]} />
+<p number={10} isHide={true} params={{name:"zhangsan"}}></p>	
+```
+
++ 动态style，也需要用 {} 进行多包括一层
+
+```jsx
+ <div style={{background: 'red', width: '100px', height: '100px', marginBottom:'10px'}}></div>
+```
+
 + 组件内动态生成列表使用map遍历，只能使用**表达式（****<font style="color:#DF2A3F;">a+b | a | demo() | arr.map | function(){} </font>****）**，不能用代码块
 + 组件动态绑定参数 使用{}
 + 条件渲染使用 if判断，或三元运算
@@ -864,7 +875,7 @@ Hook函数只能在**<font style="color:#DF2A3F;">函数组件内</font>**使用
 自带的开发工具，开发模式下会<font style="color:#DF2A3F;">检查组件（过时生命周期钩子及过时API），并发出警告和错误信息</font>。生产环境不影响。
 
 ```jsx
-  import { StrictMode } from 'react'
+import { StrictMode } from 'react'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
