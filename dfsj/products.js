@@ -1,6 +1,6 @@
 export const dfworks = [
     {
-        id:100,
+        id:"100",
         name:"智慧地磅系统",
         des:"贵州磷化地磅称重系统",
         resumeID:"101",
@@ -11,7 +11,7 @@ export const dfworks = [
         ]
     },
     {
-        id:200,
+        id:"200",
         name:"非现中心平台-web",
         des:"非现场治超管理平台",
         resumeID:"201",
@@ -22,7 +22,7 @@ export const dfworks = [
         ]
     },
      {
-        id:210,
+        id:"210",
         name:"非现中心平台-web新版",
         des:"非现场治超管理平台",
         resumeID:"201",
@@ -33,7 +33,7 @@ export const dfworks = [
         ]
     },
     {
-        id:220,
+        id:"220",
         name:"非现中心平台-App/小程序",
         des:"非现场治超管理平台",
         resumeID:"201",
@@ -45,7 +45,7 @@ export const dfworks = [
         ]
     },
      {
-        id:310,
+        id:"310",
         name:"智慧服务区安心停车-小程序",
         des:"山东葛洲坝集团《人工智能技术在高速公路场景研究及应用》智慧服务区场景",
         resumeID:"301",
@@ -57,7 +57,7 @@ export const dfworks = [
         ]
     },
     {
-        id:320,
+        id:"320",
         name:"智慧服务区：安心停车-小程序管理端",
         des:"山东葛洲坝集团《人工智能技术在高速公路场景研究及应用》智慧服务区场景",
         resumeID:"301",
@@ -68,7 +68,7 @@ export const dfworks = [
         ]
     },
     {
-        id:330,
+        id:"330",
         name:"智慧收费站：超限提示应用",
         des:"山东葛洲坝集团《人工智能技术在高速公路场景研究及应用》智慧收费站场景",
         resumeID:"301",
@@ -79,7 +79,7 @@ export const dfworks = [
         ]
     },
     {
-        id:330,
+        id:"330",
         name:"智慧高速：事件告警平台",
         des:"山东葛洲坝集团《人工智能技术在高速公路场景研究及应用》智慧高速场景",
         resumeID:"301",
