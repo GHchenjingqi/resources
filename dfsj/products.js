@@ -7,7 +7,7 @@ export const dfworks = [
         path:"https://fastly.jsdelivr.net/gh/GHchenjingqi/resources/dfsj/db/",
         cover:"003.jpg",
         imgs:[
-            "001.jpg","002.jpg","003.jpg","004.jpg","006.jpg","007.jpg","008.jpg","009.jpg","010.jpg","011.jpg","012.jpg","013.jpg","014.jpg","015.jpg","016.jpg","017.jpg","018.jpg","019.jpg","020.jpg","021.jpg","022.jpg","023.jpg","024.jpg","025.jpg","026.jpg",
+            "001.jpg","002.jpg","003.jpg","004.jpg","006.jpg","007.jpg","008.jpg","009.jpg","010.jpg","011.jpg","012.jpg","013.jpg","014.jpg","015.jpg","016.jpg","017.jpg","018.jpg","019.jpg","020.jpg","021.jpg","022.jpg","023.jpg","024.jpg","025.jpg","026.jpg"
         ]
     },
     {
@@ -18,7 +18,7 @@ export const dfworks = [
         path:"https://fastly.jsdelivr.net/gh/GHchenjingqi/resources/dfsj/feixian/web/",
         cover:"pc02.jpg",
         imgs:[
-            "openpage01.png","openpage02.png","pc01.jpg","pc02.jpg","pc03.jpg","pc04.jpg","pc05.jpg","pc06.jpg","pc06_1.jpg","pc07.jpg","pc08.jpg","pc08_1.jpg","pc09.jpg","pc09_1.jpg","pc09_2.jpg","pc10.jpg","pc11.jpg","pc12.jpg","pc13.jpg","pc14.jpg","pc15.jpg","pc16.jpg","pc17.jpg","pc18.jpg","pc19.jpg","publicpage01.jpg","publicpage02.jpg","publicpage03.jpg",
+            "openpage01.png","openpage02.png","pc01.jpg","pc02.jpg","pc03.jpg","pc04.jpg","pc05.jpg","pc06.jpg","pc06_1.jpg","pc07.jpg","pc08.jpg","pc08_1.jpg","pc09.jpg","pc09_1.jpg","pc09_2.jpg","pc10.jpg","pc11.jpg","pc12.jpg","pc13.jpg","pc14.jpg","pc15.jpg","pc16.jpg","pc17.jpg","pc18.jpg","pc19.jpg","publicpage01.jpg","publicpage02.jpg","publicpage03.jpg"
         ]
     },
      {
@@ -53,7 +53,7 @@ export const dfworks = [
         path:"https://fastly.jsdelivr.net/gh/GHchenjingqi/resources/dfsj/gzb/xcx/",
         cover:"003.jpg",
         imgs:[
-           "001.jpg","002.jpg","003.jpg","004.jpg","005.jpg","006.jpg","007.jpg","008.jpg",
+           "001.jpg","002.jpg","003.jpg","004.jpg","005.jpg","006.jpg","007.jpg","008.jpg"
         ]
     },
     {
@@ -64,7 +64,7 @@ export const dfworks = [
         path:"https://fastly.jsdelivr.net/gh/GHchenjingqi/resources/dfsj/gzb/xcxweb/",
         cover:"001.jpg",
         imgs:[
-           "001.jpg","002.jpg","003.png","004.jpg","005.png","006.jpg",
+           "001.jpg","002.jpg","003.png","004.jpg","005.png","006.jpg"
         ]
     },
     {
@@ -86,7 +86,7 @@ export const dfworks = [
         path:"https://fastly.jsdelivr.net/gh/GHchenjingqi/resources/dfsj/gzb/sj/",
         cover:"002.png",
         imgs:[
-           "001.png","002.png","003.png","004.png","005.png","006.png",
+           "001.png","002.png","003.png","004.png","005.png","006.png"
         ]
     },
 ]
