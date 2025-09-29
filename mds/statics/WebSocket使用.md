@@ -1,7 +1,7 @@
 ### 一、WebSocket是什么？
 WebSocket是一种协议，用于提供低延迟/全双工/长连接的客户端与服务器通信方式。
 
-**半双工：**通信双方不能同时发消息，只能等待一方发完，另一方才能发送消息。
+**半双工**：通信双方不能同时发消息，只能等待一方发完，另一方才能发送消息。
 
 **全双工**：通信的双方可以同时发送和接收消息，不需要等待对方相应和传输完成。
 
@@ -101,114 +101,182 @@ ws.onmessage = function (e) {
 #### 4.单例模式
 ```javascript
 class WebSocketManager {
-    constructor(url) {
-        if (WebSocketManager.instance) {
-            return WebSocketManager.instance;
+  constructor(url) {
+    if (WebSocketManager.instance) {
+      return WebSocketManager.instance
+    }
+
+    this.url = url
+    this.socket = null
+    this.reconnectAttempts = 0
+    this.maxReconnectAttempts = 5
+    this.reconnectInterval = 3000 // 毫秒
+    this.messageListeners = []
+    this.readyState = WebSocket.CLOSED
+    this.heartbeatInterval = 30000 // 30秒心跳间隔
+    this.heartbeatTimer = null
+    this.pingMessage = 'ping'
+    this.pongMessage = 'pong'
+    this.waitingForPong = false
+    this.pongTimeout = 10000 // 10秒pong超时
+    this.pongTimeoutTimer = null
+
+    this.connect()
+
+    WebSocketManager.instance = this
+  }
+
+  connect() {
+    if (!this.url) {
+      console.error('WebSocket URL is not defined.')
+      return
+    }
+
+    this.socket = new WebSocket(this.url)
+    this.readyState = this.socket.readyState
+
+    this.socket.onopen = () => {
+      console.log('WebSocket connected.')
+      this.reconnectAttempts = 0 // 重置重连计数器
+      this.readyState = WebSocket.OPEN
+      this.startHeartbeat()
+    }
+
+    this.socket.onmessage = event => {
+      // 检查是否是心跳响应
+      if (event.data === this.pongMessage) {
+        this.handlePong()
+        return
+      }
+
+      // 如果是心跳请求，则响应
+      if (event.data === this.pingMessage) {
+        this.socket.send(this.pongMessage)
+        return
+      }
+
+      // 分发消息给所有监听者
+      this.messageListeners.forEach(listener => {
+        listener(event)
+      })
+    }
+
+    this.socket.onclose = event => {
+      console.log(`WebSocket closed: ${event.reason}`)
+      this.readyState = WebSocket.CLOSED
+      this.stopHeartbeat()
+      this.attemptReconnect()
+    }
+
+    this.socket.onerror = error => {
+      console.error('WebSocket error:', error)
+      this.stopHeartbeat()
+      this.socket.close()
+    }
+  }
+
+  startHeartbeat() {
+    this.stopHeartbeat() // 确保先停止已有的心跳
+
+    // 发送心跳
+    this.heartbeatTimer = setInterval(() => {
+      if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+        try {
+          this.waitingForPong = true
+          this.socket.send(this.pingMessage)
+
+          // 设置pong超时
+          this.pongTimeoutTimer = setTimeout(() => {
+            if (this.waitingForPong) {
+              console.warn('Pong timeout, closing connection...')
+              this.socket.close()
+            }
+          }, this.pongTimeout)
+        } catch (e) {
+          console.error('Error sending heartbeat:', e)
+          this.socket.close()
         }
+      }
+    }, this.heartbeatInterval)
+  }
 
-        this.url = url;
-        this.socket = null;
-        this.reconnectAttempts = 0;
-        this.maxReconnectAttempts = 5;
-        this.reconnectInterval = 3000; // 毫秒
-        this.messageListeners = [];
-        this.readyState = WebSocket.CLOSED;
-
-        this.connect();
-
-        WebSocketManager.instance = this;
+  stopHeartbeat() {
+    if (this.heartbeatTimer) {
+      clearInterval(this.heartbeatTimer)
+      this.heartbeatTimer = null
     }
-
-    connect() {
-        if (!this.url) {
-            console.error("WebSocket URL is not defined.");
-            return;
-        }
-
-        this.socket = new WebSocket(this.url);
-        this.readyState = this.socket.readyState;
-
-        this.socket.onopen = () => {
-            console.log("WebSocket connected.");
-            this.reconnectAttempts = 0; // 重置重连计数器
-            this.readyState = WebSocket.OPEN;
-        };
-
-        this.socket.onmessage = (event) => {
-            // 分发消息给所有监听者
-            this.messageListeners.forEach((listener) => {
-                listener(event);
-            });
-        };
-
-        this.socket.onclose = (event) => {
-            console.log(`WebSocket closed: ${event.reason}`);
-            this.readyState = WebSocket.CLOSED;
-            this.attemptReconnect();
-        };
-
-        this.socket.onerror = (error) => {
-            console.error("WebSocket error:", error);
-            this.socket.close();
-        };
+    if (this.pongTimeoutTimer) {
+      clearTimeout(this.pongTimeoutTimer)
+      this.pongTimeoutTimer = null
     }
+    this.waitingForPong = false
+  }
 
-    attemptReconnect() {
-        if (this.reconnectAttempts < this.maxReconnectAttempts) {
-            setTimeout(() => {
-                console.log(`Reconnecting WebSocket... Attempt ${this.reconnectAttempts + 1}`);
-                this.reconnectAttempts++;
-                this.connect();
-            }, this.reconnectInterval);
-        } else {
-            console.warn("Maximum reconnect attempts reached. Giving up.");
-        }
+  handlePong() {
+    this.waitingForPong = false
+    if (this.pongTimeoutTimer) {
+      clearTimeout(this.pongTimeoutTimer)
+      this.pongTimeoutTimer = null
     }
+  }
 
-    sendMessage(message) {
-        if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-            this.socket.send(message);
-        } else {
-            console.warn("WebSocket not open. Message not sent.");
-        }
+  attemptReconnect() {
+    if (this.reconnectAttempts < this.maxReconnectAttempts) {
+      setTimeout(() => {
+        console.log(`Reconnecting WebSocket... Attempt ${this.reconnectAttempts + 1}`)
+        this.reconnectAttempts++
+        this.connect()
+      }, this.reconnectInterval)
+    } else {
+      console.warn('Maximum reconnect attempts reached. Giving up.')
     }
+  }
 
-    addMessageListener(callback) {
-        if (typeof callback === 'function') {
-            this.messageListeners.push(callback);
-        }
+  sendMessage(message) {
+    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+      this.socket.send(message)
+      //   console.log('Sent message:', message)
+    } else {
+      console.warn('WebSocket not open. Message not sent.')
     }
+  }
 
-    removeMessageListener(callback) {
-        const index = this.messageListeners.indexOf(callback);
-        if (index > -1) {
-            this.messageListeners.splice(index, 1);
-        }
+  addMessageListener(callback) {
+    if (typeof callback === 'function') {
+      this.messageListeners.push(callback)
     }
+  }
 
-    close() {
-        if (this.socket) {
-            this.socket.close();
-            this.readyState = WebSocket.CLOSED;
-        }
+  removeMessageListener(callback) {
+    const index = this.messageListeners.indexOf(callback)
+    if (index > -1) {
+      this.messageListeners.splice(index, 1)
     }
+  }
 
-    // 获取当前连接状态
-    getSocketState() {
-        return this.socket ? this.socket.readyState : WebSocket.CLOSED;
+  close() {
+    if (this.socket) {
+      this.stopHeartbeat()
+      this.socket.close()
+      this.readyState = WebSocket.CLOSED
     }
+  }
 
-    // 静态方法获取实例
-    static getInstance(url) {
-        if (!WebSocketManager.instance) {
-            WebSocketManager.instance = new WebSocketManager(url);
-        }
-        return WebSocketManager.instance;
+  // 获取当前连接状态
+  getSocketState() {
+    return this.socket ? this.socket.readyState : WebSocket.CLOSED
+  }
+
+  // 静态方法获取实例
+  static getInstance(url) {
+    if (!WebSocketManager.instance) {
+      WebSocketManager.instance = new WebSocketManager(url)
     }
+    return WebSocketManager.instance
+  }
 }
-
 // 导出单例（如果使用模块系统）
-export default WebSocketManager;
+export default WebSocketManager
 ```
 
 前端使用单例模式：
@@ -216,15 +284,19 @@ export default WebSocketManager;
 ```javascript
 import WebSocketManager from '@/utils/websocket'
 // 初始化并获取单例实例
-const wsManager = WebSocketManager.getInstance('wss://your-websocket-url');
-// 添加消息监听器
-wsManager.addMessageListener((event) => {
+let wsManager = null
+function initSocket(){
+  if( wsManager ) return
+  wsManager = WebSocketManager.getInstance('wss://your-websocket-url');
+  // 添加消息监听器
+  wsManager.addMessageListener((event) => {
     console.log('Received message:', event.data);
-});
+  });
+}
+
 // 发送消息
 wsManager.sendMessage(JSON.stringify({ type: 'hello', content: 'Hello Server!' }));
 // 关闭连接（可选）
-
 // 销毁
 wsManager.close()
 wsManager.removeMessageListener()

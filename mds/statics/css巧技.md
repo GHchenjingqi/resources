@@ -316,3 +316,13 @@ box-reflect在谷歌浏览器完全支持，在IE/火狐不兼容。
 -webkit-box-reflect:below 15px -webkit-linear-gradient(transparent,transparent 30%,rgba(255,255,255,.3));
 ```
 
+### CSS 竖排文字+水平垂直居中
+```css
+/*竖排*/
+writing-mode: vertical-rl;
+/*水平垂直居中*/
+display: grid;
+justify-content: center;
+align-items: center;
+```
+
