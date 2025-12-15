@@ -5,9 +5,22 @@
         "des": "贵州磷化地磅称重系统",
         "resumeID": "101",
         "path": "http://115.190.117.177:10086/dfsj/db/",
+        "localurl":"http://115.190.117.177:13801/",
         "cover": "003.jpg",
         "imgs": [
             "001.jpg", "002.jpg", "003.jpg", "004.jpg", "006.jpg", "007.jpg", "008.jpg", "009.jpg", "010.jpg", "011.jpg", "012.jpg", "013.jpg", "014.jpg", "015.jpg", "016.jpg", "017.jpg", "018.jpg", "019.jpg", "020.jpg", "021.jpg", "022.jpg", "023.jpg", "024.jpg", "025.jpg", "026.jpg"
+        ]
+    },
+    {
+        "id": "210",
+        "name": "非现中心平台-web新版",
+        "localurl":"http://115.190.117.177:13802/",
+        "des": "非现场治超管理平台",
+        "resumeID": "201",
+        "path": "http://115.190.117.177:10086/dfsj/feixian/webnew/",
+        "cover": "004.jpg",
+        "imgs": [
+            "001.jpg", "002.jpg", "003.jpg", "004.jpg", "005.jpg", "006.jpg", "007.jpg", "008.jpg", "009.jpg", "010.jpg", "011.jpg", "012.jpg", "013.jpg", "014.jpg", "015.jpg", "016.jpg", "017.jpg", "018.jpg", "019.jpg", "020.jpg", "020_1.jpg", "021.jpg", "022.jpg", "023.jpg", "024.jpg", "025.jpg", "026.jpg", "027.jpg", "028.jpg", "029.jpg", "030.jpg", "031.jpg", "032.jpg", "033.jpg", "034.jpg"
         ]
     },
     {
@@ -19,17 +32,6 @@
         "cover": "pc02.jpg",
         "imgs": [
             "openpage01.png", "openpage02.png", "pc01.jpg", "pc02.jpg", "pc03.jpg", "pc04.jpg", "pc05.jpg", "pc06.jpg", "pc06_1.jpg", "pc07.jpg", "pc08.jpg", "pc08_1.jpg", "pc09.jpg", "pc09_1.jpg", "pc09_2.jpg", "pc10.jpg", "pc11.jpg", "pc12.jpg", "pc13.jpg", "pc14.jpg", "pc15.jpg", "pc16.jpg", "pc17.jpg", "pc18.jpg", "pc19.jpg", "publicpage01.jpg", "publicpage02.jpg", "publicpage03.jpg"
-        ]
-    },
-    {
-        "id": "210",
-        "name": "非现中心平台-web新版",
-        "des": "非现场治超管理平台",
-        "resumeID": "201",
-        "path": "http://115.190.117.177:10086/dfsj/feixian/webnew/",
-        "cover": "004.jpg",
-        "imgs": [
-            "001.jpg", "002.jpg", "003.jpg", "004.jpg", "005.jpg", "006.jpg", "007.jpg", "008.jpg", "009.jpg", "010.jpg", "011.jpg", "012.jpg", "013.jpg", "014.jpg", "015.jpg", "016.jpg", "017.jpg", "018.jpg", "019.jpg", "020.jpg", "020_1.jpg", "021.jpg", "022.jpg", "023.jpg", "024.jpg", "025.jpg", "026.jpg", "027.jpg", "028.jpg", "029.jpg", "030.jpg", "031.jpg", "032.jpg", "033.jpg", "034.jpg"
         ]
     },
     {
@@ -88,5 +90,48 @@
         "imgs": [
             "001.png", "002.png", "003.png", "004.png", "005.png", "006.png"
         ]
+    },
+     {
+        "id": "400",
+        "name": "会计宝官网",
+        "des": "针对会计从业者的一个在线会计相关知识问答响应式网站",
+         "localurl":"http://www.kjb100.com/",
+        "resumeID": "301",
+        "path": "http://115.190.117.177:10086/dfsj/kjb/",
+        "cover": "kjb.png",
+        "imgs": [
+            "kjb.png"
+        ]
+    },
+     {
+        "id": "404",
+        "name": "会计宝小程序",
+        "des": "针对会计从业者的一个在线会计相关知识问答程序",
+        "resumeID": "301",
+        "path": "http://115.190.117.177:10086/dfsj/kjb/",
+        "cover": "kjb2.png",
+        "imgs": [ "kjb2.png"]
+    },
+     {
+        "id": "401",
+        "name": "领远教育官网",
+        "des": "领远教育企业落地营销网站",
+         "localurl":"http://lingyuan100.com/",
+        "resumeID": "301",
+        "path": "http://115.190.117.177:10086/dfsj/kjb/",
+        "cover": "kjb3.png",
+        "imgs": [
+           "kjb3.png" 
+        ]
+    },
+     {
+        "id": "402",
+        "name": "会计教练官网",
+        "des": "针对会计从业者的一个在线会计培训项目",
+        "localurl":"https://www.kjjl100.com/",
+        "resumeID": "301",
+        "path": "http://115.190.117.177:10086/dfsj/kjb/",
+        "cover": "kjjl.png",
+        "imgs": [ "kjjl.png"]
     }
 ]
